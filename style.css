@@ -1,0 +1,286 @@
+:root{
+  --bg:#fbf7fb;
+  --panel:#ffffff;
+  --text:#1f1030;
+  --muted:#7a6a83;
+  --line:#f2d7ea;
+  --accent:#f06292;
+  --accent2:#a78bfa;
+  --shadow:0 14px 32px rgba(31,16,48,.10);
+  --r:22px;
+  --r2:14px;
+}
+
+/* ================== RESET ================== */
+*{box-sizing:border-box;}
+
+html, body{height:100%;}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(240,98,146,.14) 0 150px, transparent 151px),
+    radial-gradient(circle at 90% 82%, rgba(167,139,250,.10) 0 210px, transparent 211px),
+    var(--bg);
+  display:flex;
+  justify-content:center;
+  padding:16px;
+  color:var(--text);
+  overflow:hidden; /* ❌ SAYFA SCROLL YOK */
+}
+
+/* ================== APP ================== */
+.app{
+  width:min(1200px,100%);
+  height:calc(100vh - 32px);
+  background:rgba(255,255,255,.92);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  display:flex;
+}
+
+/* ================== SIDEBAR ================== */
+.sidebar{
+  width:280px;
+  min-width:220px;
+  max-width:320px;
+  flex-shrink:0;
+  background:#fff;
+  border-right:1px solid var(--line);
+  display:flex;
+  flex-direction:column;
+  padding:14px;
+  gap:10px;
+  min-height:0;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  font-size:16px;
+}
+
+.logo{
+  width:34px;
+  height:34px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  background:linear-gradient(135deg, rgba(240,98,146,.95), rgba(167,139,250,.9));
+  user-select:none;
+}
+
+.search{width:100%;}
+
+.input{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:10px 12px;
+  outline:none;
+  font-size:14px;
+}
+
+.input:focus{
+  border-color:rgba(240,98,146,.75);
+  box-shadow:0 0 0 3px rgba(240,98,146,.12);
+}
+
+.newTopic{
+  width:100%;
+  border:none;
+  border-radius:12px;
+  padding:10px 12px;
+  font-weight:800;
+  cursor:pointer;
+  color:#fff;
+  background:linear-gradient(135deg, #f06292, #ec4899);
+}
+
+.listWrap{
+  flex:1;
+  overflow:auto; /* sidebar kendi içinde kayar */
+  min-height:0;
+  padding:4px;
+}
+
+.topicCard{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:10px;
+  margin:8px 0;
+  cursor:pointer;
+}
+
+.topicCard.active{
+  border-color:rgba(240,98,146,.85);
+  box-shadow:0 12px 20px rgba(240,98,146,.12);
+}
+
+.tTitle{
+  font-weight:800;
+  font-size:14px;
+  margin:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.tDesc{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+.tFoot{
+  margin-top:8px;
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+}
+
+.del{
+  border:1px solid var(--line);
+  background:#fff;
+  color:#b4234c;
+  border-radius:10px;
+  padding:6px 10px;
+  cursor:pointer;
+}
+
+/* ================== MAIN ================== */
+.main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  min-height:0;
+}
+
+/* ✅ TOP BAR: başlık hiç görünmesin + rozet hep sağda */
+.topbar{
+  height:46px;
+  border-bottom:1px solid var(--line);
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end; /* 🔥 hep sağa */
+  padding:6px 10px;
+  gap:10px;
+}
+
+/* ❌ başlık istemiyorsun: tamamen kapalı */
+.topTitle{
+  display:none !important;
+}
+
+/* rozet sağda sabit kalsın */
+.saved{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:4px 10px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:11px;
+  margin-left:auto;  /* ekstra garanti */
+  white-space:nowrap;
+}
+
+.dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#f06292;
+}
+
+.content{
+  flex:1;
+  overflow:hidden;   /* sayfa değil, içeride note kayacak */
+  padding:12px;
+  min-height:0;
+}
+
+.wrap{
+  height:100%;
+  max-width:860px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
+
+.titleInput{
+  border:none;
+  outline:none;
+  font-size:28px;
+  font-weight:700;
+  background:transparent;
+  margin-bottom:6px;
+}
+
+.tools{
+  display:flex;
+  gap:10px;
+  margin-bottom:8px;
+  flex-wrap:wrap;
+}
+
+.toolBtn{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:999px;
+  padding:8px 12px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* 🔥 NOTE: sadece burası scroll */
+.note{
+  flex:1;
+  min-height:0;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:12px;
+  font-size:15px;
+  line-height:1.6;
+  resize:none;
+  overflow:auto;
+}
+
+.note:focus{
+  border-color:rgba(240,98,146,.75);
+  box-shadow:0 0 0 3px rgba(240,98,146,.12);
+}
+
+.meta{
+  margin-top:8px;
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  color:#9a889f;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width:900px){
+  body{padding:12px;}
+  .app{height:calc(100vh - 24px);}
+  .sidebar{width:240px; min-width:200px;}
+  .titleInput{font-size:22px;}
+  .note{font-size:14px;}
+}
+
+@media (max-width:680px){
+  .sidebar{width:200px; min-width:180px;}
+  .toolBtn{font-size:12px; padding:6px 10px;}
+  /* rozet hep sağda kalsın, istersen kapatabilirsin (şimdilik açık bırakıyorum) */
+}
