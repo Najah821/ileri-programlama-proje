@@ -1,12 +1,59 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>İleri Programlama Projem</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Konu Araştırma Not Defteri</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <h1>Hoş geldiniz</h1>
-  <p>Bu sayfa İleri Programlama dersi için oluşturduğum GitHub Pages sitesidir.</p>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">📘</div>
+        <div>Not Defteri</div>
+      </div>
+
+      <div class="search">
+        <input id="search" class="input" placeholder="Konularda ara..." />
+      </div>
+
+      <button id="newBtn" class="newTopic">+ New Topic</button>
+
+      <div id="list" class="listWrap"></div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div id="topTitle" class="topTitle">Untitled</div>
+        <div class="saved">
+          <span class="dot"></span>
+          <span id="saveText">Saved locally</span>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="wrap">
+          <input id="title" class="titleInput" placeholder="Konu başlığı..." />
+
+          <div class="tools">
+            <button type="button" id="bulletBtn" class="toolBtn">– Madde satırı</button>
+            <button type="button" id="todoBtn" class="toolBtn">⬜ To-do satırı</button>
+          </div>
+
+          <textarea id="note" class="note" placeholder="Notlarını buraya yaz..."></textarea>
+
+          <div class="meta">
+            <div id="count">0 karakter</div>
+            <div id="updated">—</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
-
