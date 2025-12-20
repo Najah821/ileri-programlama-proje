@@ -154,13 +154,23 @@ function renderList(){
 /**
  * loadUI()
  * Sağ taraftaki alanları state'e göre doldurur.
+ * ✅ FIX: Kullanıcı title/note yazarken inputları resetleme (boşluk sorunu biter)
  */
 function loadUI(){
   const a = getActiveTopic();
 
   $("topTitle").textContent = a ? (a.title || "Untitled") : "Untitled";
-  $("title").value = a ? (a.title || "") : "";
-  $("note").value = a ? (a.note || "") : "";
+
+  // Title alanı aktif değilse set et
+  if(document.activeElement !== $("title")){
+    $("title").value = a ? (a.title || "") : "";
+  }
+
+  // Note alanı aktif değilse set et
+  if(document.activeElement !== $("note")){
+    $("note").value = a ? (a.note || "") : "";
+  }
+
   $("count").textContent = (a ? (a.note || "").length : 0) + " karakter";
   $("updated").textContent = a ? ("Updated: " + formatDate(a.updatedAt || Date.now())) : "—";
   $("saveText").textContent = "Saved locally";
@@ -169,21 +179,44 @@ function loadUI(){
 /**
  * scheduleAutosave()
  * Kullanıcı yazdıkça 400ms sonra kaydeder (debounce).
+ * 
  */
 function scheduleAutosave(){
   $("saveText").textContent = "Saving...";
   clearTimeout(debounceTimer);
+
   debounceTimer = setTimeout(()=>{
     const a = ensureActiveTopic();
-    a.title = ($("title").value || "Untitled").trim() || "Untitled";
+
+    a.title = $("title").value ?? "";
     a.note = $("note").value || "";
     a.updatedAt = Date.now();
     state.activeId = a.id;
+
     saveState(state);
-    loadUI();
+
+
     renderList();
+
+    
+    $("count").textContent = ($("note").value || "").length + " karakter";
+    $("updated").textContent = "Updated: " + formatDate(a.updatedAt);
+    $("saveText").textContent = "Saved locally";
   }, 400);
 }
+
+$("note").addEventListener("focus", ()=>{
+  const titleEl = $("title");
+  const a = ensureActiveTopic();
+
+  if(titleEl.value.trim() === ""){
+    titleEl.value = "Untitled";
+    a.title = "Untitled";
+    a.updatedAt = Date.now();
+    saveState(state);
+    renderList();
+  }
+});
 
 /**
  * insertPrefix(prefix)
