@@ -13,7 +13,6 @@
 
 /* ================== RESET ================== */
 *{box-sizing:border-box;}
-
 html, body{height:100%;}
 
 body{
@@ -27,7 +26,7 @@ body{
   justify-content:center;
   padding:16px;
   color:var(--text);
-  overflow:hidden; /* ❌ SAYFA SCROLL YOK */
+  overflow:hidden; /* sayfa scroll yok */
 }
 
 /* ================== APP ================== */
@@ -105,7 +104,7 @@ body{
 
 .listWrap{
   flex:1;
-  overflow:auto; /* sidebar kendi içinde kayar */
+  overflow:auto;
   min-height:0;
   padding:4px;
 }
@@ -124,19 +123,30 @@ body{
   box-shadow:0 12px 20px rgba(240,98,146,.12);
 }
 
+/* ✅ FIX: Uzun başlık sidebar’ı bozmasın / taşma olmasın */
 .tTitle{
   font-weight:800;
   font-size:14px;
   margin:0;
-  white-space:nowrap;
+
+  white-space:normal;
   overflow:hidden;
-  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  word-break:break-word;
 }
 
 .tDesc{
   font-size:12px;
   color:var(--muted);
   margin-top:6px;
+
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  word-break:break-word;
 }
 
 .tFoot{
@@ -164,24 +174,20 @@ body{
   min-height:0;
 }
 
-/* ✅ TOP BAR: başlık hiç görünmesin + rozet hep sağda */
+/* TOP BAR */
 .topbar{
   height:46px;
   border-bottom:1px solid var(--line);
   background:#fff;
   display:flex;
   align-items:center;
-  justify-content:flex-end; /* 🔥 hep sağa */
+  justify-content:flex-end;
   padding:6px 10px;
   gap:10px;
 }
 
-/* ❌ başlık istemiyorsun: tamamen kapalı */
-.topTitle{
-  display:none !important;
-}
+.topTitle{ display:none !important; }
 
-/* rozet sağda sabit kalsın */
 .saved{
   display:flex;
   align-items:center;
@@ -190,7 +196,7 @@ body{
   border:1px solid var(--line);
   border-radius:999px;
   font-size:11px;
-  margin-left:auto;  /* ekstra garanti */
+  margin-left:auto;
   white-space:nowrap;
 }
 
@@ -203,7 +209,7 @@ body{
 
 .content{
   flex:1;
-  overflow:hidden;   /* sayfa değil, içeride note kayacak */
+  overflow:hidden;
   padding:12px;
   min-height:0;
 }
@@ -242,7 +248,6 @@ body{
   cursor:pointer;
 }
 
-/* 🔥 NOTE: sadece burası scroll */
 .note{
   flex:1;
   min-height:0;
@@ -282,5 +287,4 @@ body{
 @media (max-width:680px){
   .sidebar{width:200px; min-width:180px;}
   .toolBtn{font-size:12px; padding:6px 10px;}
-  /* rozet hep sağda kalsın, istersen kapatabilirsin (şimdilik açık bırakıyorum) */
 }
